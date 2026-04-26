@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from django.conf import settings
-from .models import Property
+from .models import Property, Reservation
 from useraccount.serializers import UserDetailSerializer
 class PropertiesListSerializer(serializers.ModelSerializer):
     image_url = serializers.SerializerMethodField()
@@ -40,3 +40,12 @@ class PropertiesDetailSerializer(serializers.ModelSerializer):
         if obj.image:
             return f"{settings.WEBSITE_URL}{obj.image.url}"
         return ""
+    
+class ReservationsListSerializer(serializers.ModelSerializer):
+    property= PropertiesListSerializer(read_only=True, many=False)
+    
+    class Meta:
+        model = Reservation 
+        fields=(
+            'id','start_date','end_date','number_of_nights','total_price','property'
+        )
