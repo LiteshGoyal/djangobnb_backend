@@ -1,17 +1,19 @@
 #!/bin/sh
+
 echo "Entrypoint script running..."
+
 if [ "$DATABASE" = "postgres" ]
 then
-    echo "Check if database is running..."
+    echo "Waiting for postgres..."
 
     while ! nc -z $SQL_HOST $SQL_PORT; do
-        sleep 0.1
+      sleep 0.1
     done
 
-    echo "The database is up and running"
+    echo "PostgreSQL started"
 fi
 
-python manage.py makemigrations
 python manage.py migrate
+python manage.py collectstatic --noinput
 
 exec "$@"
