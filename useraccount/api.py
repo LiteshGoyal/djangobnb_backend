@@ -22,3 +22,11 @@ def reservations_list(request):
     reservations = request.user.reservations.all()
     serializer = ReservationsListSerializer(reservations, many=True)
     return JsonResponse(serializer.data, safe=False)
+
+
+@api_view(['GET'])
+def user_detail(request,pk):
+    user = User.objects.get(pk=pk)
+    serializer = UserDetailSerializer(user,many=False)
+
+    return JsonResponse(serializer.data)

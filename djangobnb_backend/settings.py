@@ -1,9 +1,9 @@
 import os
 from pathlib import Path
 from datetime import timedelta
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 
-load_dotenv()
+# load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -87,7 +87,7 @@ CSRF_TRUSTED_ORIGINS = os.getenv(
 
 CORS_ALLOWED_ORIGINS = os.getenv("CORS_ALLOWED_ORIGINS", "").split(",")
 
-CORS_ALLOW_ALL_ORIGINS = False
+CORS_ALLOW_ALL_ORIGINS = True
 
 REST_AUTH={
     "USE_JWT":True,
