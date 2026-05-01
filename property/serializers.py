@@ -14,7 +14,7 @@ class PropertiesListSerializer(serializers.ModelSerializer):
             'image_url'
         )
 
-    def image_url(self, obj):
+    def get_image_url(self, obj):
         if obj.image:
             return f"{settings.WEBSITE_URL}{obj.image.url}"
         return ""
