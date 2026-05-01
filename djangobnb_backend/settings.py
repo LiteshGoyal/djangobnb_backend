@@ -7,7 +7,11 @@ from datetime import timedelta
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
+REST_AUTH = {
+    "USE_JWT": True,
+    "JWT_AUTH_HTTPONLY": False,
+    "REGISTER_SERIALIZER": "useraccount.serializers.CustomRegisterSerializer",
+}
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
@@ -89,12 +93,6 @@ CORS_ALLOWED_ORIGINS = os.getenv("CORS_ALLOWED_ORIGINS", "").split(",")
 
 CORS_ALLOW_ALL_ORIGINS = True
 
-REST_AUTH={
-    "USE_JWT":True,
-    "JWT_AUTH_HTTPONLY":False
-}
-
-
 INSTALLED_APPS = [
     'daphne',
     'django.contrib.admin',
@@ -110,6 +108,7 @@ INSTALLED_APPS = [
 
     "allauth",
     "allauth.account",
+    'allauth.socialaccount',
 
     "dj_rest_auth",
     "dj_rest_auth.registration",
